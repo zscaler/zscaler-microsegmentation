@@ -11,7 +11,7 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
 ### Prerequisites
 
 * The Azure VM Agent is required to be installed on each endpoint
-* The command `unzip` must available on each endpoint
+* `wget` and `unzip` must installed on each endpoint
 * An Azure Compute Gallery is required to use Azure VM Applications. [Refer to this document](https://learn.microsoft.com/en-us/azure/virtual-machines/vm-applications-how-to) for more information.
     * Note, an Azure Compute Gallery will be required for each applicable region.
 * An Azure Storage Account is required to host the deployment package. [Refer to this document](https://learn.microsoft.com/en-us/azure/virtual-machines/vm-applications-how-to) for more information.
@@ -73,11 +73,11 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
     * Source application package: Paste the Blob SAS URL string from the Upload the Installation Package step above.
     * Install script:
     ```
-    mv zscaler-microsegmentation-agent-linux-rpm zscaler-microsegmentation-agent-linux-rpm.zip; mkdir -p /opt/zscaler/installation && unzip -o zscaler-microsegmentation-agent-linux-rpm.zip -d /opt/zscaler/installation && chmod +x /opt/zscaler/installation/*.sh && /opt/zscaler/installation/install.sh &> /opt/zscaler/installation/install.log
+    mv zscaler-microsegmentation-agent-linux-rpm zscaler-microsegmentation-agent-linux-rpm.zip; mkdir -p /opt/zscaler/zms/installation && unzip -o zscaler-microsegmentation-agent-linux-rpm.zip -d /opt/zscaler/zms/installation && chmod +x /opt/zscaler/zms/installation/*.sh && /opt/zscaler/zms/installation/install.sh &> /opt/zscaler/zms/installation/install.log
     ```
     * Uninstall script:
     ```
-    /opt/zscaler/installation/uninstall.sh && rm -rf /opt/zscaler/installation &> /opt/zscaler/installation/uninstall.log
+    /opt/zscaler/zms/installation/uninstall.sh && rm -rf /opt/zscaler/zms/installation &> /opt/zscaler/zms/installation/uninstall.log
     ```
     * Package file name: zscaler-microsegmentation-agent-linux-rpm.zip
 3. Select Review and then Create
@@ -96,11 +96,11 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
     * Source application package: Paste the Blob SAS URL string from the Upload the Installation Package step above.
     * Install script:
     ```
-    mv zscaler-microsegmentation-agent-linux-deb zscaler-microsegmentation-agent-linux-deb.zip; mkdir -p /opt/zscaler/installation && unzip -o zscaler-microsegmentation-agent-linux-deb.zip -d /opt/zscaler/installation && chmod +x /opt/zscaler/installation/*.sh && /opt/zscaler/installation/install.sh &> /opt/zscaler/installation/install.log
+    mv zscaler-microsegmentation-agent-linux-deb zscaler-microsegmentation-agent-linux-deb.zip; mkdir -p /opt/zscaler/zms/installation && unzip -o zscaler-microsegmentation-agent-linux-deb.zip -d /opt/zscaler/zms/installation && chmod +x /opt/zscaler/zms/installation/*.sh && /opt/zscaler/zms/installation/install.sh &> /opt/zscaler/zms/installation/install.log
     ```
     * Uninstall script:
     ```
-    /opt/zscaler/installation/uninstall.sh && rm -rf /opt/zscaler/installation &> /opt/zscaler/installation/uninstall.log
+    /opt/zscaler/zms/installation/uninstall.sh && rm -rf /opt/zscaler/zms/installation &> /opt/zscaler/zms/installation/uninstall.log
     ```
     * Package file name: zscaler-microsegmentation-agent-linux-deb.zip
 3. Select Review and then Create
@@ -184,7 +184,7 @@ To update the provision_key file or to make similar modifications to the content
 
 ##### Linux
 
-`/opt/zscaler/installation/install.log`
+`/opt/zscaler/zms/installation/install.log`
 
 #### Azure VMAppExtension is Stuck Installing/Uninstalling or is Unavailable
 
