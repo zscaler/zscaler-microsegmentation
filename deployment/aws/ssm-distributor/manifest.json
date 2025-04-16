@@ -1,0 +1,51 @@
+{
+    "schemaVersion": "2.0",
+    "version": "1.0.0",
+    "packages": {
+        "windows": {
+            "_any": {
+                "x86_64": {
+                    "file": "zscaler-microsegmentation-agent-windows.zip"
+                }
+            }
+        },
+        "redhat": {
+            "_any": {
+                "x86_64": {
+                    "file": "zscaler-microsegmentation-agent-linux-rpm.zip"
+                }
+            }
+        },
+        "amazon": {
+            "_any": {
+                "x86_64": {
+                    "file": "zscaler-microsegmentation-agent-linux-rpm.zip"
+                }
+            }
+        },
+        "ubuntu": {
+            "_any": {
+                "x86_64": {
+                    "file": "zscaler-microsegmentation-agent-linux-deb.zip"
+                }
+            }
+        }
+    },
+    "files": {
+        "zscaler-microsegmentation-agent-windows.zip": {
+            "checksums": {
+                "sha256": "UPDATE_THIS_VALUE"
+            }
+        },
+        "zscaler-microsegmentation-agent-linux-rpm.zip": {
+            "checksums": {
+                "sha256": "UPDATE_THIS_VALUE"
+            }
+        },
+        "zscaler-microsegmentation-agent-linux-deb.zip": {
+            "checksums": {
+                "sha256": "UPDATE_THIS_VALUE"
+            }
+        }
+    }
+}

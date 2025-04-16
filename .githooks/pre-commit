@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+# Check if any provision_key example files are size greater than 0
+for file in $(find . -type f -name provision_key)
+do 
+    if [ -s $file ]; then
+        echo "One or more provision_key files are not empty"
+        echo $file
+        exit 1
+    fi
+done
