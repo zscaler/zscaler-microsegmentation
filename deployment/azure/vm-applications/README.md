@@ -11,7 +11,7 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
 ### Prerequisites
 
 * The Azure VM Agent is required to be installed on each endpoint
-* The command `unzip` must available on each endpoint
+* `wget` and `unzip` must installed on each endpoint
 * An Azure Compute Gallery is required to use Azure VM Applications. [Refer to this document](https://learn.microsoft.com/en-us/azure/virtual-machines/vm-applications-how-to) for more information.
     * Note, an Azure Compute Gallery will be required for each applicable region.
 * An Azure Storage Account is required to host the deployment package. [Refer to this document](https://learn.microsoft.com/en-us/azure/virtual-machines/vm-applications-how-to) for more information.
