@@ -1,5 +1,24 @@
-mkdir -p /opt/zscaler/var
-mv provision_key /opt/zscaler/var
-wget -N --secure-protocol=TLSv1_2 --debug --directory-prefix=/opt/zscaler/installation https://eyez-dist.private.zscaler.com/linux/eyez-agentmanager-default-1.el7.x86_64.rpm 
-# wget -N --secure-protocol=TLSv1_2 --debug --directory-prefix=/opt/zscaler/installation https://eyez-dist.zpabeta.net/linux/eyez-agentmanager-default-1.el7.x86_64.rpm
-yum install --disablerepo=* -y /opt/zscaler/installation/eyez-agentmanager-default-1.el7.x86_64.rpm
+#!/bin/sh
+
+# Specify the download URL
+URL="https://eyez-dist.private.zscaler.com/linux/eyez-agentmanager-default-1.el7.x86_64.rpm"  # Production
+# URL="https://eyez-dist.zpabeta.net/linux/eyez-agentmanager-default-1.el7.x86_64.rpm"  # Beta
+
+# Specify the root directory
+DIR="/opt/zscaler"
+
+mkdir -p $DIR/var
+mv -f provision_key $DIR/var
+
+if command -v wget 2>&1 >/dev/null
+then
+    wget -N --debug --secure-protocol=TLSv1_2 --tries=2 --retry-connrefused --retry-on-host-error --directory-prefix="$DIR/installation" $URL
+elif command -v curl 2>&1 >/dev/null
+then
+    curl -v --tlsv1.2 --retry 2 --retry-all-errors --remote-name --create-dirs --output-dir "$DIR/installation" $URL
+else
+    echo "Failed to download installer"
+    exit 1
+fi
+
+yum install --disablerepo=* -y $DIR/installation/eyez-agentmanager-default-1.el7.x86_64.rpm
