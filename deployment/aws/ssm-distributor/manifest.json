@@ -12,21 +12,21 @@
         "redhat": {
             "_any": {
                 "x86_64": {
-                    "file": "zscaler-microsegmentation-agent-linux-rpm.zip"
+                    "file": "zscaler-microsegmentation-agent-linux.zip"
                 }
             }
         },
         "amazon": {
             "_any": {
                 "x86_64": {
-                    "file": "zscaler-microsegmentation-agent-linux-rpm.zip"
+                    "file": "zscaler-microsegmentation-agent-linux.zip"
                 }
             }
         },
         "ubuntu": {
             "_any": {
                 "x86_64": {
-                    "file": "zscaler-microsegmentation-agent-linux-deb.zip"
+                    "file": "zscaler-microsegmentation-agent-linux.zip"
                 }
             }
         }
@@ -37,12 +37,7 @@
                 "sha256": "UPDATE_THIS_VALUE"
             }
         },
-        "zscaler-microsegmentation-agent-linux-rpm.zip": {
-            "checksums": {
-                "sha256": "UPDATE_THIS_VALUE"
-            }
-        },
-        "zscaler-microsegmentation-agent-linux-deb.zip": {
+        "zscaler-microsegmentation-agent-linux.zip": {
             "checksums": {
                 "sha256": "UPDATE_THIS_VALUE"
             }

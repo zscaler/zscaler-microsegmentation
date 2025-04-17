@@ -28,8 +28,7 @@ Distributor is a great way to deploy the Zscaler Microsegmentation agent to AWS 
 2. Upload the following files to the S3 bucket:
     * manifest.json
     * zscaler-microsegmentation-agent-windows.zip
-    * zscaler-microsegmentation-agent-linux-rpm.zip
-    * zscaler-microsegmentation-agent-linux-deb.zip
+    * zscaler-microsegmentation-agent-linux.zip
 
 #### Configure AWS SSM Distributor
 
