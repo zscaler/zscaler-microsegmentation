@@ -33,8 +33,7 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
 1. Verify that all prerequisites are met
 2. Upload the following files to the Azure Storage Account Container:
     * zscaler-microsegmentation-agent-windows.zip
-    * zscaler-microsegmentation-agent-linux-rpm.zip
-    * zscaler-microsegmentation-agent-linux-deb.zip
+    * zscaler-microsegmentation-agent-linux.zip
 3. Select the first uploaded file. Click Generate SAS and then Generate SAS Token and URL. Copy the Blob SAS URL string and save it for a subsequent step. Perform this action for the other uploaded files.
 
 #### Create a VM Application Definition - Windows
@@ -60,13 +59,13 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
     * Package file name: zscaler-microsegmentation-agent-windows.zip
 3. Select Review and then Create
 
-#### Create a VM Application Definition - Linux \*RPM\*
+#### Create a VM Application Definition - Linux
 
 1. Navigate to the previously created Azure Compute Gallery. Select Add > VM Application Definition.
 2. Provide a Name, Region, and OS Type. Select Review and then Create.
     * Note, a VM Application Definition will be required for each applicable OS type.
 
-#### Create a VM Application Version - Linux \*RPM\*
+#### Create a VM Application Version - Linux
 
 1. On the VM Application Definition summary screen, select Add to create a new VM Application Version.
 2. Provide the following information:
@@ -74,36 +73,13 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
     * Source application package: Paste the Blob SAS URL string from the Upload the Installation Package step above.
     * Install script:
     ```
-    mv zscaler-microsegmentation-agent-linux-rpm zscaler-microsegmentation-agent-linux-rpm.zip; mkdir -p /opt/zscaler/installation && unzip -o zscaler-microsegmentation-agent-linux-rpm.zip -d /opt/zscaler/installation && chmod +x /opt/zscaler/installation/*.sh && /opt/zscaler/installation/install.sh &> /opt/zscaler/installation/install.log
+    mv zscaler-microsegmentation-agent-linux zscaler-microsegmentation-agent-linux.zip; mkdir -p /opt/zscaler/installation && unzip -o zscaler-microsegmentation-agent-linux.zip -d /opt/zscaler/installation && chmod +x /opt/zscaler/installation/*.sh && /opt/zscaler/installation/install.sh &> /opt/zscaler/installation/install.log
     ```
     * Uninstall script:
     ```
     /opt/zscaler/installation/uninstall.sh && rm -rf /opt/zscaler/installation &> /opt/zscaler/installation/uninstall.log
     ```
-    * Package file name: zscaler-microsegmentation-agent-linux-rpm.zip
-3. Select Review and then Create
-
-#### Create a VM Application Definition - Linux \*DEB\*
-
-1. Navigate to the previously created Azure Compute Gallery. Select Add > VM Application Definition.
-2. Provide a Name, Region, and OS Type. Select Review and then Create.
-    * Note, a VM Application Definition will be required for each applicable OS type.
-
-#### Create a VM Application Version - Linux \*DEB\*
-
-1. On the VM Application Definition summary screen, select Add to create a new VM Application Version.
-2. Provide the following information:
-    * Version number: Specify a version number.
-    * Source application package: Paste the Blob SAS URL string from the Upload the Installation Package step above.
-    * Install script:
-    ```
-    mv zscaler-microsegmentation-agent-linux-deb zscaler-microsegmentation-agent-linux-deb.zip; mkdir -p /opt/zscaler/installation && unzip -o zscaler-microsegmentation-agent-linux-deb.zip -d /opt/zscaler/installation && chmod +x /opt/zscaler/installation/*.sh && /opt/zscaler/installation/install.sh &> /opt/zscaler/installation/install.log
-    ```
-    * Uninstall script:
-    ```
-    /opt/zscaler/installation/uninstall.sh && rm -rf /opt/zscaler/installation &> /opt/zscaler/installation/uninstall.log
-    ```
-    * Package file name: zscaler-microsegmentation-agent-linux-deb.zip
+    * Package file name: zscaler-microsegmentation-agent-linux.zip
 3. Select Review and then Create
 
 #### Deploy the Installation Package
