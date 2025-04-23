@@ -78,7 +78,7 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
     ```
     * Uninstall script:
     ```
-    /opt/zscaler/installation/uninstall.sh && rm -rf /opt/zscaler/installation &> /opt/zscaler/installation/uninstall.log
+    /opt/zscaler/installation/uninstall.sh
     ```
     * Package file name: zscaler-microsegmentation-agent-linux-rpm.zip
 3. Select Review and then Create
@@ -101,7 +101,7 @@ VM Applications is a great way to deploy the Zscaler Microsegmentation agent to 
     ```
     * Uninstall script:
     ```
-    /opt/zscaler/installation/uninstall.sh && rm -rf /opt/zscaler/installation &> /opt/zscaler/installation/uninstall.log
+    /opt/zscaler/installation/uninstall.sh
     ```
     * Package file name: zscaler-microsegmentation-agent-linux-deb.zip
 3. Select Review and then Create
