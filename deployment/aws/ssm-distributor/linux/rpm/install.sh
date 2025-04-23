@@ -27,7 +27,8 @@ download_file()
         then
             # Exit code was nonzero. Attempt curl with fewer options.
             echo "Failed to download $1 using default curl options. Attempting fall-back."
-            curl -v --retry 3 -o $2 $1
+            FILENAME=$(basename $2)
+            curl -v --retry 3 -o "$2/$FILENAME" $1
             if [ $? -ne 0 ]
             then
                 echo "Failed to download $1 using curl fall-back options" >&2
