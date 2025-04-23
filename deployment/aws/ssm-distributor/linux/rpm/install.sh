@@ -10,6 +10,7 @@ URL="https://eyez-dist.private.zscaler.com/linux/$FILENAME"  # Production
 # Specify the root directory
 DIR="/opt/zscaler"
 
+mkdir -p $DIR/installation
 mkdir -p $DIR/var
 mv -f provision_key $DIR/var
 
