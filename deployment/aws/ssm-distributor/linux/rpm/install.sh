@@ -45,6 +45,12 @@ download_file()
     echo -e "Download complete\n"
 }
 
+copy_from_s3()
+{
+    echo "Copying $1 to $2"
+    aws s3 cp $1 $2
+}
+
 # Specify the installer filename
 INSTALLER="eyez-agentmanager-default-1.el7.x86_64.rpm"
 
@@ -54,6 +60,7 @@ GPG="gpg"
 # Specify the root URL
 URL="https://eyez-dist.private.zscaler.com/linux"  # Production
 # URL="https://eyez-dist.zpabeta.net/linux"  # Beta
+# URL="s3://<bucket>/<directory>"  # Local S3 bucket
 
 # Specify the root directory
 DIR="/opt/zscaler/zms"
@@ -76,6 +83,10 @@ if [ "$(echo $URL | cut -c 1-6)" = "https:" ]
 then
     download_file "$URL/$INSTALLER" "$DIR/installation"
     download_file "$URL/$GPG" "$DIR/installation"
+elif [ "$(echo $URL | cut -c 1-3)" = "s3:" ]
+then
+    copy_from_s3 "$URL/$INSTALLER" "$DIR/installation"
+    copy_from_s3 "$URL/$GPG" "$DIR/installation"
 else
     echo "Invalid URL: $URL"
     exit 1
