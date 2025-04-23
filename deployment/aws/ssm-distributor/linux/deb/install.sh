@@ -41,12 +41,18 @@ download_file()
     fi
 }
 
+copy_from_s3()
+{
+    aws s3 cp $1 $2
+}
+
 # Specify the installer filename
 INSTALLER="eyez-agentmanager-default-1.amd64.deb"
 
 # Specify the root URL
 URL="https://eyez-dist.private.zscaler.com/linux"  # Production
 # URL="https://eyez-dist.zpabeta.net/linux"  # Beta
+# URL="s3://<bucket>/<directory>"  # Local S3 bucket
 
 # Specify the root directory
 DIR="/opt/zscaler"
@@ -56,8 +62,17 @@ mkdir -p $DIR/installation
 mkdir -p $DIR/var
 mv -f provision_key $DIR/var
 
-# Download files
-download_file "$URL/$INSTALLER" "$DIR/installation"
+# Get files
+if [[ $URL == *"https:"* ]]
+then
+    download_file "$URL/$INSTALLER" "$DIR/installation"
+elif [[ $URL == *"s3:"* ]]
+then
+    copy_from_s3 "$URL/$INSTALLER" "$DIR/installation"
+else
+    echo "Invalid URL: $URL"
+    exit 1
+fi
 
 # Run the installer
 apt-get install -y $DIR/installation/$INSTALLER

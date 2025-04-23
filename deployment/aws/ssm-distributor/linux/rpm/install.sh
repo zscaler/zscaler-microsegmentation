@@ -41,6 +41,11 @@ download_file()
     fi
 }
 
+copy_from_s3()
+{
+    aws s3 cp $1 $2
+}
+
 # Specify the installer filename
 INSTALLER="eyez-agentmanager-default-1.el7.x86_64.rpm"
 
@@ -50,6 +55,7 @@ GPG="gpg"
 # Specify the root URL
 URL="https://eyez-dist.private.zscaler.com/linux"  # Production
 # URL="https://eyez-dist.zpabeta.net/linux"  # Beta
+# URL="s3://<bucket>/<directory>"  # Local S3 bucket
 
 # Specify the root directory
 DIR="/opt/zscaler"
@@ -59,9 +65,19 @@ mkdir -p $DIR/installation
 mkdir -p $DIR/var
 mv -f provision_key $DIR/var
 
-# Download files
-download_file "$URL/$INSTALLER" "$DIR/installation"
-download_file "$URL/$GPG" "$DIR/installation"
+# Get files
+if [[ $URL == *"https:"* ]]
+then
+    download_file "$URL/$INSTALLER" "$DIR/installation"
+    download_file "$URL/$GPG" "$DIR/installation"
+elif [[ $URL == *"s3:"* ]]
+then
+    copy_from_s3 "$URL/$INSTALLER" "$DIR/installation"
+    copy_from_s3 "$URL/$GPG" "$DIR/installation"
+else
+    echo "Invalid URL: $URL"
+    exit 1
+fi
 
 # Import the GPG key
 rpm --import $DIR/installation/$GPG
