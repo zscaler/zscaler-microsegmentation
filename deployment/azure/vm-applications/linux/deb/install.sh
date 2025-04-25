@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 download_file()
 {
@@ -68,13 +68,7 @@ mv -f $DIR/installation/provision_key $DIR/var
 echo -e "Done\n"
 
 # Get files
-if [[ $URL == *"https:"* ]]
-then
-    download_file "$URL/$INSTALLER" "$DIR/installation"
-else
-    echo "Invalid URL: $URL"
-    exit 1
-fi
+download_file "$URL/$INSTALLER" "$DIR/installation"
 
 # Run the installer
 echo "Installing the deb package"

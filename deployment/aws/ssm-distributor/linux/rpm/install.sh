@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 download_file()
 {
@@ -80,11 +80,11 @@ mv -f provision_key $DIR/var
 echo -e "Done\n"
 
 # Get files
-if [[ $URL == *"https:"* ]]
+if [ "$(echo $URL | cut -c 1-6)" = "https:" ]
 then
     download_file "$URL/$INSTALLER" "$DIR/installation"
     download_file "$URL/$GPG" "$DIR/installation"
-elif [[ $URL == *"s3:"* ]]
+elif [ "$(echo $URL | cut -c 1-3)" = "s3:" ]
 then
     copy_from_s3 "$URL/$INSTALLER" "$DIR/installation"
     copy_from_s3 "$URL/$GPG" "$DIR/installation"
