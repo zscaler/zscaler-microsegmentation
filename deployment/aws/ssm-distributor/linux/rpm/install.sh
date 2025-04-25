@@ -104,7 +104,7 @@ fi
 echo -e "Done\n"
 
 # Run the installer
-echo "Installing the RPM"
+echo "Installing the rpm package"
 yum install --disablerepo=* -y $DIR/installation/$INSTALLER
 if [ $? -ne 0 ]
 then
