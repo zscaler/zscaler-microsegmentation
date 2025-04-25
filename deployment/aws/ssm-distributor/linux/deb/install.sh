@@ -65,7 +65,7 @@ DIR="/opt/zscaler"
 
 echo -e "Starting install\n"
 
-# Create directories and move the provision_key
+# Create directories
 echo "Creating directories"
 mkdir -p $DIR/installation
 mkdir -p $DIR/var
