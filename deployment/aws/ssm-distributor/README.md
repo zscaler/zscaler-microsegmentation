@@ -9,7 +9,8 @@ Distributor is a great way to deploy the Zscaler Microsegmentation agent to AWS 
 
 ### Prerequisites
 * The AWS SSM agent must be installed on the endpoints. [Refer to this document](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html) for more information.
-* `wget` and `unzip` must available on each endpoint
+* `unzip` must available on each endpoint
+* `wget` or `curl` must be available on each endpoint
 * An S3 bucket is required to host the deployment package. It is advisable to enable Versioning on the bucket. [Refer to this document](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html#creating-bucket) for more information. 
 * IAM permissions must be configured to allow SSM to manage EC2 instances. The Default Host Management Configuration option is sufficient. [Refer to this document](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-permissions.html) for more information.
 
