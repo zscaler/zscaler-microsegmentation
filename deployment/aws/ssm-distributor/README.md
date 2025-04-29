@@ -90,7 +90,7 @@ To update the provision_key file or to make similar modifications to the content
 
 ##### Windows
 
-`C:\ProgramData\Zscaler\ZMS\installation\install.log`
+`C:\ProgramData\Amazon\SSM\Packages\<appname>\<app version>\*.log`
 
 ##### Linux
 
