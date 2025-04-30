@@ -82,6 +82,16 @@ To update the provision_key file or to make similar modifications to the content
 
 #### Review the Installation Logs
 
+##### SSM Distributor
+
 1. When configuring the SSM Distributor install command options, specify an S3 bucket or CloudWatch Logs log group as log targets in the Output Options section
     * Note, IAM roles and policies may affect SSM's ability to write logs to S3 and CloudWatch Logs
 2. Review the logs written to S3 or CloudWatch Logs
+
+##### Windows
+
+`C:\ProgramData\Amazon\SSM\Packages\<appname>\<app version>\*.log`
+
+##### Linux
+
+The Linux install script does not create a local log file. Use the SSM Distributor log file as described above.

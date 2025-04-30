@@ -56,7 +56,7 @@ URL="https://eyez-dist.private.zscaler.com/linux"  # Production
 # URL="https://eyez-dist.zpabeta.net/linux"  # Beta
 
 # Specify the root directory
-DIR="/opt/zscaler"
+DIR="/opt/zscaler/zms"
 
 echo -e "Starting install\n"
 
