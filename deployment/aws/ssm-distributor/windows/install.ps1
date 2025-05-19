@@ -46,7 +46,7 @@ $installer = "eyez-agentmanager-default.msi"
 # Specify the root URL
 $url = "https://eyez-dist.private.zscaler.com/windows"
 # $url = "https://eyez-dist.zpabeta.net/windows"
-# $url = "s3://<bucket>/<directory>""
+# $url = "s3://<bucket>/<directory>"
 
 # Log all output to a local file
 Start-Transcript -Path "$PSScriptRoot\install.log"
@@ -71,8 +71,13 @@ foreach ($sslCheckUrl in $sslCheckUrls) {
 }
 
 # Get files
-DownloadFile "$url/$installer" "$PSScriptRoot\$installer"
-# CopyFromS3 "s3://<bucket>/<folder>/<filename>" "$PSScriptRoot\$installer"
+if ($url -like "https://*") {
+  DownloadFile "$url/$installer" "$PSScriptRoot\$installer"
+} elseif ($url -like "s3://*") {
+  CopyFromS3 "$url/$installer" "$PSScriptRoot\$installer"
+} else {
+  throw "Invalid URL: $url"
+}
 
 # Run the installer
 $Arguments = @(
