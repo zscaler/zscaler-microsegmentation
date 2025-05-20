@@ -57,7 +57,7 @@ INSTALLER="eyez-agentmanager-default-1.el7.x86_64.rpm"
 # Specify the GPG filename
 GPG="gpg"
 
-# Specify the root URL
+# Specify the root URL. Uncomment and update the preferred cloud or S3 bucket target.
 URL="https://eyez-dist.private.zscaler.com/linux"  # Production
 # URL="https://eyez-dist.zpabeta.net/linux"  # Beta
 # URL="s3://<bucket>/<directory>"  # Local S3 bucket

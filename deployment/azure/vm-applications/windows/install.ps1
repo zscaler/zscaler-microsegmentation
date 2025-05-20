@@ -1,21 +1,20 @@
-# Function used to test SSL connectivity
-function CheckSSL($fqdn, $port=443) 
+# Function used to download files from a source URL to a destination directory
+function DownloadFile($source, $destination)
 {
-    try {
-        $tcpSocket = New-Object Net.Sockets.TcpClient($fqdn, $port)
-    } catch {
-        Write-Warning "$($_.Exception.Message) / $fqdn"
-        break
-    }
-    $tcpStream = $tcpSocket.GetStream()
-    $sslStream = New-Object -TypeName Net.Security.SslStream($tcpStream, $false)
-    $sslStream.AuthenticateAsClient($fqdn, $null, [System.Net.SecurityProtocolType]'Tls, Tls12', $false)  # Force TLS 1.2
-    $certinfo = New-Object -TypeName Security.Cryptography.X509Certificates.X509Certificate2(
-        $sslStream.RemoteCertificate)
-    $sslStream 
-    $certinfo
-    $tcpSocket.Close() 
+  Write-Host "`nDownloading $source to $destination"
+  if ($source -ne "") {
+    Invoke-WebRequest $source -OutFile $destination
+  } else {
+    throw "`nDownload failed. No URL specified."
+  }
 }
+
+# Specify the installer filename
+$installer = "eyez-agentmanager-default.msi"
+
+# Specify the root URL. Uncomment and update the preferred cloud or S3 bucket target.
+$url = "https://eyez-dist.private.zscaler.com/windows"  # Production
+# $url = "https://eyez-dist.zpabeta.net/windows"  # Beta
 
 # Log all output to a local file
 Start-Transcript -Path "$PSScriptRoot\install.log"
@@ -27,47 +26,11 @@ Write-Host "This script was executed by:"
 # Force TLS 1.2 for this session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-# Check connectivity and set the download URL
-$AgentManagerUrl = ""
-
-try {
-  # Test connect to ZPA production download
-  Write-Host "Testing connection to ZPA production"
-  Test-NetConnection -ComputerName "eyez-dist.private.zscaler.com" -Port 443
-  $AgentManagerUrl = "https://eyez-dist.private.zscaler.com/windows/eyez-agentmanager-default.msi"
-} catch {
-  Write-Host "Failed to connect to ZPA production"
-  Write-Host $_
-}
-
-if ($AgentManagerUrl -eq "") {
-  try {
-    # Test connect to ZPA beta download
-    Write-Host "Testing connection to ZPA beta"
-    Test-NetConnection -ComputerName "eyez-dist.zpabeta.net" -Port 443 
-    $AgentManagerUrl = "https://eyez-dist.zpabeta.net/windows/eyez-agentmanager-default.msi"
-  } catch {
-    Write-Host "Failed to connect to ZPA beta"
-    Write-Host $_
-  }
-}
-
-# Test and log SSL connection to help debug packet inspection issues that will break agent mTLS
-try {
-  $SslCheckUrl = $AgentManagerUrl.split("/")[2]
-  Write-Host "`nRunning SSL certificate check against $SslCheckUrl"
-  CheckSSL $SslCheckUrl
-} catch {
-  Write-Host "SSL check error to $SslCheckUrl"
-  Write-Host $_
-}
-
-# Download the Microsegmentation installer
-if ($AgentManagerUrl -ne "") {
-  Write-Host "Downloading the installer from $AgentManagerUrl"
-  Invoke-WebRequest $AgentManagerUrl -OutFile "$PSScriptRoot\eyez-agentmanager-default.msi"
+# Get files
+if ($url -like "https://*") {
+  DownloadFile "$url/$installer" "$PSScriptRoot\$installer"
 } else {
-  throw "No download URL specified"
+  throw "Invalid URL: $url"
 }
 
 # Install the Microsegmentation agent

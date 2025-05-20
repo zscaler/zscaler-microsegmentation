@@ -54,7 +54,7 @@ copy_from_s3()
 # Specify the installer filename
 INSTALLER="eyez-agentmanager-default-1.amd64.deb"
 
-# Specify the root URL
+# Specify the root URL. Uncomment and update the preferred cloud or S3 bucket target.
 URL="https://eyez-dist.private.zscaler.com/linux"  # Production
 # URL="https://eyez-dist.zpabeta.net/linux"  # Beta
 # URL="s3://<bucket>/<directory>"  # Local S3 bucket
